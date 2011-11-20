@@ -1,0 +1,11 @@
+Simple c++ fragments that demonstrate some features of the new c++11 standard.
+
+Use the following instructions to build and use this demo:
+
+$ ./configure
+$ make
+$ src/little_c11
+
+The sources and corresponding comments can be found within src/little_c11.cpp.
+
+Have fun!
