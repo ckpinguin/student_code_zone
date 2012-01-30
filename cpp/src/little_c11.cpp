@@ -64,11 +64,11 @@ int main (int argc, char** argv)
 
     /* The following needs >= gcc-4.6 (which I don't have already...) */
     // [> but now this is a lot easier <]
-    // sum = 0;
-    // for (int i : some_values){
-        // sum += 1;
-    // }
-    // cout << "Using the new c++11 featured range-based for loop I get the sum: " << sum << endl;
+    sum = 0;
+    for (int i : some_values){
+	  sum += i;
+    }
+    cout << "Using the new c++11 featured range-based for loop I get the sum: " << sum << endl;
 
     /* new style - lamdba forever - this needs >= gcc 4.5... */
     sum = 0;
