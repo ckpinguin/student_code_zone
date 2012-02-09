@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /* From "Beautiful code" (Brian Kerninghan) */
-
+// this is a C99 standard commentary (try this with microsoft vc++ ;-)
 
 /* Search for regexp anywhere in text */
 int match (char *regexp, char *text)
