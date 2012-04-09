@@ -1,10 +1,20 @@
-/* txt2html_example.c */
+/* txt2html.c */
 #include <stdio.h>
 #include <stdlib.h>
 
-/* nchars = Anzahl der Zeichen */
-/* tag    = Sonderzeichen in HTML */
-/* ziel   = Datei, in die geschrieben wird */
+void html_head(FILE *ziel) {
+   fprintf(ziel, "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD"
+                 " HTML 4.0 Transitional//EN\">\n");
+   fprintf(ziel,"<html><head><title>Test-Webseite"
+                "</title></head><body>\n");
+   fprintf(ziel,"<pre>\n");
+   fprintf(ziel,"<p style=\"margin-right:0.8cm; "
+                " margin-left:0.5cm\" align=\"justify\">\n");
+}
+
+void html_end(FILE *ziel) {
+   fprintf(ziel,"</pre></p></body></html>\n");
+}
 
 void sonderzeichen(int nchars, char *tag, FILE *ziel) {
    int i;
@@ -12,6 +22,7 @@ void sonderzeichen(int nchars, char *tag, FILE *ziel) {
 
    for(i = 0; i < nchars; i++) {
       zeichen = tag[i];
+
       putc(zeichen, ziel);
    }
 }
@@ -21,17 +32,21 @@ int main(int argc, char **argv) {
    int zeichen;
 
    if(argc < 3) {
-      printf("Benutzung : %s quelle ziel\n", *argv);
+      printf("Benutzung : %s quelle ziel\n",*argv);
       return EXIT_FAILURE;
    }
 
    q = fopen(argv[1], "r");
    z = fopen(argv[2], "w");
+
    if(q == NULL || z == NULL) {
-      printf("Fehler bei Oeffnen einer Datei ...\n");
-      return EXIT_FAILURE;
+      printf("Fehler bei fopen() ... ");
+      return EXIT_SUCCESS;
    }
-   while((zeichen=getc(q)) != EOF) {
+   /* Kopfzeile für HTML-Dokument */
+   html_head(z);
+
+   while( (zeichen=getc(q)) != EOF) {
       if(zeichen=='<')
          sonderzeichen(4,"&lt;", z);
       else if(zeichen=='>')
@@ -54,8 +69,14 @@ int main(int argc, char **argv) {
          sonderzeichen(6 ,"&Uuml;",z);
       else if(zeichen=='ß')
          sonderzeichen(6 ,"&szlig;",z);
+      else if(zeichen=='\n') /* Zeilenumbruch */
+         sonderzeichen(4, "<br>", z);
+      else if(zeichen==' ')  /* Leerzeichen */
+         sonderzeichen(6, "&nbsp;", z);
       else
          putc(zeichen, z);
    }
+   /* Ende von HTML-Datei */
+   html_end(z);
    return EXIT_SUCCESS;
 }

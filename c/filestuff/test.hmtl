@@ -1,7 +1,5 @@
-hello world!
-grösser als &lt;&gt;! oder so, whatever biß
-
-wassup?
-
-hyugarugabongaflock!
-
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Test-Webseite</title></head><body>
+<pre>
+<p style="margin-right:0.8cm;  margin-left:0.5cm" align="justify">
+hello&nbsp;world!<br>grösser&nbsp;als&nbsp;&lt;&gt;!&nbsp;oder&nbsp;so,&nbsp;whatever&nbsp;biß<br><br>wassup?<br><br>hyugarugabongaflock!<br><br></pre></p></body></html>
